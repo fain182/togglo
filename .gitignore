@@ -2,6 +2,7 @@
 *.o
 *.a
 *.so
+/togglo
 
 # Folders
 /bin
