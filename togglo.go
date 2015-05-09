@@ -26,6 +26,10 @@ func main() {
 }
 
 func addOrdinaryWorkDay(workspaceId, projectId string, date string) {
+	if len(date) != len("2015-01-12") {
+		println("ERROR: Date format should be: 2015-05-05")
+		os.Exit(1)
+	}
 	morningEntry := createHalfDayTimeEntry(workspaceId, projectId, date+"T09:00:00+02:00")
 	afternoonEntry := createHalfDayTimeEntry(workspaceId, projectId, date+"T14:00:00+02:00")
 	sendTimeEntry(morningEntry)
