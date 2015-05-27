@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/codegangsta/cli"
 	"os"
+	"time"
 )
 
 func main() {
@@ -26,12 +27,20 @@ func main() {
 }
 
 func addOrdinaryWorkDay(workspaceId, projectId string, date string) {
-	if len(date) != len("2015-01-12") {
-		println("ERROR: Date format should be: 2015-05-05")
+	timezone, _ := time.LoadLocation("Europe/Rome")
+	exampleFormat := "2006-01-02"
+	midnightDate, errorDateFormat := time.ParseInLocation(exampleFormat, date, timezone)
+	if errorDateFormat != nil {
+		println("ERROR: Date format should be: 2015-05-31")
+		println(errorDateFormat.Error())
 		os.Exit(1)
 	}
-	morningEntry := createHalfDayTimeEntry(workspaceId, projectId, date+"T09:00:00+02:00")
-	afternoonEntry := createHalfDayTimeEntry(workspaceId, projectId, date+"T14:00:00+02:00")
+
+	morningStartTime := midnightDate.Add(9 * time.Hour)
+	morningEntry := createHalfDayTimeEntry(workspaceId, projectId, morningStartTime)
 	sendTimeEntry(morningEntry)
+
+	afternoonStartTime := midnightDate.Add(14 * time.Hour)
+	afternoonEntry := createHalfDayTimeEntry(workspaceId, projectId, afternoonStartTime)
 	sendTimeEntry(afternoonEntry)
 }

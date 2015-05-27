@@ -1,5 +1,7 @@
 package main
 
+import "time"
+
 type TimeEntry struct {
 	Description string `json:"description"`
 	CreatedWith string `json:"created_with"`
@@ -10,11 +12,11 @@ type TimeEntry struct {
 	Billable    bool   `json:"billable"`
 }
 
-func createHalfDayTimeEntry(workspaceId, projectId, datetime string) *TimeEntry {
+func createHalfDayTimeEntry(workspaceId, projectId string, datetime time.Time) *TimeEntry {
 	return &TimeEntry{
 		Description: "dev",
 		CreatedWith: "Togglo",
-		Start:       datetime,
+		Start:       datetime.Format(time.RFC3339),
 		Duration:    14400,
 		WorkspaceId: workspaceId,
 		ProjectId:   projectId,
