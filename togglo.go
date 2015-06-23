@@ -34,26 +34,20 @@ func main() {
 	app.Run(os.Args)
 }
 
-func addOrdinaryWorkDay(workspaceId, projectId string, date string) {
-	timezone, _ := time.LoadLocation("Europe/Rome")
-	exampleFormat := "2006-01-02"
-	midnightDate, errorDateFormat := time.ParseInLocation(exampleFormat, date, timezone)
-	if errorDateFormat != nil {
-		println("ERROR: Date format should be: 2015-05-31")
-		println(errorDateFormat.Error())
-		os.Exit(1)
-	}
-
-	morningStartTime := midnightDate.Add(9 * time.Hour)
-	morningEntry := createHalfDayTimeEntry(workspaceId, projectId, morningStartTime, []string{})
-	sendTimeEntry(morningEntry)
-
-	afternoonStartTime := midnightDate.Add(14 * time.Hour)
-	afternoonEntry := createHalfDayTimeEntry(workspaceId, projectId, afternoonStartTime, []string{})
-	sendTimeEntry(afternoonEntry)
+func addOrdinaryWorkDay(workspaceId, projectId, date string) {
+	midnightDate := parseDate(date)
+	entries := createDayTimeEntries(workspaceId, projectId, midnightDate, []string{})
+	sendTimeEntries(entries)
 }
 
 func addVacationDay(workspaceId, date string) {
+	midnightDate := parseDate(date)
+	vacationProjectId := "8352044"
+	entries := createDayTimeEntries(workspaceId, vacationProjectId, midnightDate, []string{"Ferie"})
+	sendTimeEntries(entries)
+}
+
+func parseDate(date string) time.Time {
 	timezone, _ := time.LoadLocation("Europe/Rome")
 	exampleFormat := "2006-01-02"
 	midnightDate, errorDateFormat := time.ParseInLocation(exampleFormat, date, timezone)
@@ -62,13 +56,5 @@ func addVacationDay(workspaceId, date string) {
 		println(errorDateFormat.Error())
 		os.Exit(1)
 	}
-
-	vacationProjectId := "8352044"
-	morningStartTime := midnightDate.Add(9 * time.Hour)
-	morningEntry := createHalfDayTimeEntry(workspaceId, vacationProjectId, morningStartTime, []string{"Ferie"})
-	sendTimeEntry(morningEntry)
-
-	afternoonStartTime := midnightDate.Add(14 * time.Hour)
-	afternoonEntry := createHalfDayTimeEntry(workspaceId, vacationProjectId, afternoonStartTime, []string{"Ferie"})
-	sendTimeEntry(afternoonEntry)
+	return midnightDate
 }

@@ -7,6 +7,12 @@ import (
 	"os"
 )
 
+func sendTimeEntries(entries []TimeEntry) {
+	for _, entry := range entries {
+		sendTimeEntry(&entry)
+	}
+}
+
 func sendTimeEntry(entry *TimeEntry) {
 	entryJson, err := json.Marshal(entry)
 	if err != nil {

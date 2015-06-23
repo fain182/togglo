@@ -13,6 +13,19 @@ type TimeEntry struct {
 	Tags        []string `json:"tags"`
 }
 
+func createDayTimeEntries(workspaceId, projectId string, midnightDate time.Time, tags []string) []TimeEntry {
+	entries := make([]TimeEntry, 2)
+	morningStartTime := midnightDate.Add(9 * time.Hour)
+	morningEntry := createHalfDayTimeEntry(workspaceId, projectId, morningStartTime, tags)
+	entries[0] = *morningEntry
+
+	afternoonStartTime := midnightDate.Add(14 * time.Hour)
+	afternoonEntry := createHalfDayTimeEntry(workspaceId, projectId, afternoonStartTime, tags)
+	entries[1] = *afternoonEntry
+
+	return entries
+}
+
 func createHalfDayTimeEntry(workspaceId, projectId string, datetime time.Time, tags []string) *TimeEntry {
 	return &TimeEntry{
 		Description: "dev",
