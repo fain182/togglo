@@ -16,6 +16,10 @@ func main() {
 			Name:  "work",
 			Usage: "Add a ordinary work day time entry",
 			Action: func(c *cli.Context) {
+				if len(c.Args()) < 2 {
+					println("ERROR: Too few arguments")
+					os.Exit(1)
+				}
 				var projectId = c.Args()[0]
 				var date = c.Args()[1]
 				addOrdinaryWorkDay(configuration.WorkspaceId, projectId, date)
@@ -25,6 +29,10 @@ func main() {
 			Name:  "vacation",
 			Usage: "Add a vacation day time entry",
 			Action: func(c *cli.Context) {
+				if len(c.Args()) < 1 {
+					println("ERROR: Too few arguments")
+					os.Exit(1)
+				}
 				var date = c.Args()[0]
 				addVacationDay(configuration.WorkspaceId, date)
 			},
@@ -52,7 +60,7 @@ func parseDate(date string) time.Time {
 	exampleFormat := "2006-01-02"
 	midnightDate, errorDateFormat := time.ParseInLocation(exampleFormat, date, timezone)
 	if errorDateFormat != nil {
-		println("ERROR: Date format should be: 2015-05-31")
+		println("ERROR: Date format should be: ", exampleFormat)
 		println(errorDateFormat.Error())
 		os.Exit(1)
 	}
