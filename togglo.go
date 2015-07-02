@@ -37,6 +37,15 @@ func main() {
 				addVacationDay(configuration.WorkspaceId, date)
 			},
 		},
+		{
+			Name:  "projects",
+			Usage: "List of all projects in you workspace",
+			Action: func(c *cli.Context) {
+				for _, project := range getProjects() {
+					println(project.Id, " : ", project.Name)
+				}
+			},
+		},
 	}
 
 	app.Run(os.Args)

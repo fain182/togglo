@@ -28,7 +28,7 @@ func createDayTimeEntries(workspaceId, projectId string, midnightDate time.Time,
 
 func createHalfDayTimeEntry(workspaceId, projectId string, datetime time.Time, tags []string) *TimeEntry {
 	return &TimeEntry{
-		Description: "dev",
+		Description: "-",
 		CreatedWith: "Togglo",
 		Start:       datetime.Format(time.RFC3339),
 		Duration:    14400,
