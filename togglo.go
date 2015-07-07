@@ -17,7 +17,8 @@ func main() {
 			Usage: "Add a ordinary work day time entry",
 			Action: func(c *cli.Context) {
 				if len(c.Args()) < 2 {
-					println("ERROR: Too few arguments")
+					println("Usage: togglo work [project_id] [date]")
+					println("Example: togglo work 9324358 2014-12-31")
 					os.Exit(1)
 				}
 				var projectId = c.Args()[0]
@@ -30,7 +31,8 @@ func main() {
 			Usage: "Add a vacation day time entry",
 			Action: func(c *cli.Context) {
 				if len(c.Args()) < 1 {
-					println("ERROR: Too few arguments")
+					println("Usage: togglo vacation [date]")
+					println("Example: togglo vacation 2014-12-31")
 					os.Exit(1)
 				}
 				var date = c.Args()[0]
