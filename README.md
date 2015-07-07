@@ -7,8 +7,12 @@ Compile your toggl from cli
 
 ##Install
 
-Download the binary for mac from [Releases](https://github.com/fain182/togglo/releases)
-
+Check the latest version from [Releases](https://github.com/fain182/togglo/releases).
+```
+wget https://github.com/fain182/togglo/releases/download/1.0.0/togglo
+cp togglo /usr/local/bin
+sudo chmod +x /usr/local/bin
+```
 
 ## Usage
 ![Imgur](http://i.imgur.com/WaLRRpJ.png)
