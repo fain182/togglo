@@ -5,5 +5,10 @@
 
 Compile your toggl from cli
 
-Example usage:
-togglo work <project_id> 2015-05-05
+##Install
+
+Download the binary for mac from [Releases](https://github.com/fain182/togglo/releases)
+
+
+## Usage
+![Imgur](http://i.imgur.com/WaLRRpJ.png)
