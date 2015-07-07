@@ -8,8 +8,9 @@ import (
 
 func main() {
 	app := cli.NewApp()
-	app.Name = "Togglo"
+	app.Name = "togglo"
 	app.Usage = "Compile toggle from command-line"
+	app.Version = "1.0.0"
 	configuration := getConfiguration()
 	app.Commands = []cli.Command{
 		{
