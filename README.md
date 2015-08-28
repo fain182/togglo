@@ -14,5 +14,16 @@ mv togglo /usr/local/bin
 sudo chmod +x /usr/local/bin/togglo
 ```
 
+---
+
+Setup a `~/.togglo.json` file with the following contents (fill in your information):
+
+```
+{
+  "ApiToken": "",
+  "WorkspaceId": ""
+}
+```
+
 ## Usage
 ![Imgur](http://i.imgur.com/WaLRRpJ.png)
